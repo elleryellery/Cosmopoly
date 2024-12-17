@@ -27,6 +27,8 @@ public class DataCache {
     public static JailRoom guardedRoom;
     public static int mouseX;
     public static int mouseY;
+
+    public static Property selectedProperty = (Property)GameData.GameTiles[1];
     
     public static void init(){
         players.add(new Player("B02"));

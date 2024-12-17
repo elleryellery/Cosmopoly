@@ -28,7 +28,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		GameData.shuffleChanceCards();
 		GameData.shuffleCommunityChestCards();
 
-		DataCache.myScreen = GraphicsDatabase.S05;			
+		DataCache.myScreen = GraphicsDatabase.S07;			
 	}
 
 	//Run the thread

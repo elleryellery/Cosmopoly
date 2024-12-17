@@ -100,7 +100,7 @@ public class Property extends Tile {
 
     public double getMultiplier(double m){
         if(hotel){
-            m *= 50;
+            m *= 70;
         } else if(numHouses > 0){
             switch(numHouses){
                 case 1:
@@ -121,6 +121,25 @@ public class Property extends Tile {
         }
 
         return m;
+    }
+
+    public int rentWith(int houses){
+        if(houses < 0){ //Color set not owned
+            return baseRent;
+        } else if (houses == 0){
+            return 2*baseRent;
+        } else if(houses == 1){
+            return baseRent*5;
+        } else if(houses == 2){
+            return baseRent*14;
+        } else if(houses == 3){
+            return baseRent*38;
+        } else if(houses == 4){
+            return baseRent*50;
+        } else if(houses ==5){
+            return baseRent*70;
+        }
+        return 0;
     }
 
     public int rent(){

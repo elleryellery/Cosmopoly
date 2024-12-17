@@ -121,20 +121,20 @@ public class Scripts {
     }
 
     public static void payLotTaxes(){
-        int numHouses = 0;
         int numBases = 0;
+        int numSettlements = 0;
         Player player = DataCache.currentPlayer;
 
         for(Tile pr: player.properties()){
             Property p = (Property)pr;
             if(p.hotel()){
-                numBases ++;
+                numSettlements ++;
             } else {
-                numHouses += p.houses();
+                numBases += p.houses();
             }
         }
 
-        player.collect(25*numHouses + 100*numBases);
+        player.collect(25*numBases + 100*numSettlements);
     }
 
     public static void payEachPlayer(int amountPerPlayer){

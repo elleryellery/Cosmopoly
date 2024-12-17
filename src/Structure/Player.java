@@ -59,6 +59,7 @@ public class Player {
     public void setTile(int tile){
         this.tile = tile;
     }
+    
 
     public void setTile(String tile){
         for(int i = 0; i < GameData.GameTiles.length; i++){

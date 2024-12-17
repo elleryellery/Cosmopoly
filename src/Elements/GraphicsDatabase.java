@@ -10,9 +10,9 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 
 public class GraphicsDatabase {
-    public static Button B01, B02, B03, B04, B05, B09, B10;
+    public static Button B01, B02, B03, B04, B05, B09, B10, B11, B12, B13, B14;
     public static ConditionalButton C01, C02;
-    public static Screen S01, S02, S03, S04, S05, S06;
+    public static Screen S01, S02, S03, S04, S05, S06, S07;
     public static JailRoom cell, yard, library, kitchen, control, cafeteria, bathrooms, exit;
 
     public static void init(){
@@ -61,9 +61,22 @@ public class GraphicsDatabase {
         B09 = new Button("B09", 1105, 0, 74, 650, () -> {
             Game.setScreen(S03);
         });
-        B10 = new Button("B08", 472, 335, 250, 75, () -> {
+        B10 = new Button("B10",750,165,250,75, () -> {
+            DataCache.players.getFirst().
+        });
+        B11 = new Button("B11",750,277,250,75, () -> {
+
+        });
+        B12 = new Button("B12",750,393,250,75, () -> {
+
+        });
+        B13 = new Button("B08", 472, 335, 250, 75, () -> {
             Game.setScreen(S03);
             DataCache.currentPlayer.releaseFromJail();
+        });
+        B14 = new Button("B09", 1105, 0, 74, 650, () -> {
+            Game.setScreen(S04);
+            C02.executeButtonAction();
         });
         C01 = new ConditionalButton("C01",681, 311, 70, 70, () -> (DataCache.rolling), () -> {}, true);
         C01.setAction(() -> {
@@ -89,9 +102,9 @@ public class GraphicsDatabase {
             int spacing = 20;
 
             for(Tile p: DataCache.currentPlayer.properties()){
-                System.out.println(p.name());
                 Button button = new Button(p.name(), x, y, w, h, () -> {
-                    System.out.println(p.name());
+                    DataCache.selectedProperty = (Property)p;
+                    Game.setScreen(S07);
                 });
                 button.buttonInCard();
                 b.add(button);
@@ -185,8 +198,27 @@ public class GraphicsDatabase {
             });
         
         S06 = new Screen("S06");
-            Button[] BS06 = {B10};
+            Button[] BS06 = {B13};
             S06.addButtons(BS06);
+
+        S07 = new Screen("S04");
+            Button[] BS07 = {B10, B11, B12, B14};
+            S07.addButtons(BS07);
+            S07.addScript(()->{
+                Property card = DataCache.selectedProperty;
+                Game.Graphics().drawImage(new ImageIcon("Cosmopoly-Assets\\Card\\" + card.name() + ".png").getImage(), 100, 50, 221, 500, null);
+                Game.Graphics().drawImage(new ImageIcon("Cosmopoly-Assets\\M\\Title Deed.png").getImage(), 350, 50, 221, 500, null);
+                Game.Graphics().setColor(Color.BLACK);
+                Game.Graphics().setFont(new Font("Times New Roman", Font.BOLD, 14));
+                Game.Graphics().drawString("Rent: $" + card.rentWith(-1), 388, 150);
+                Game.Graphics().drawString("Rent with color set: $" + card.rentWith(0), 388, 170);
+                Game.Graphics().drawString("Rent with 1 base: $" + card.rentWith(1), 388, 190);
+                Game.Graphics().drawString("Rent with 2 base: $" + card.rentWith(2), 388, 210);
+                Game.Graphics().drawString("Rent with 3 base: $" + card.rentWith(3), 388, 230);
+                Game.Graphics().drawString("Rent with 4 base: $" + card.rentWith(4), 388, 250);
+                Game.Graphics().drawString("Rent w/settlement: $" + card.rentWith(5), 388, 270);
+
+            });
     }
 }
 //1105
